@@ -19,51 +19,51 @@ export default function TestPage() {
 
   console.log("Value", value);
 
-  function getData() {
-    const myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaGFzaCI6IldlZCBTZXAgMjIgMjAyMSAxMDowNTowMyBHTVQtMDMwMCIsImRiIjoiSlRCUUstR0pKVDctNFlGTDUtUFdDWloiLCJhcHAiOiJydW50YXNrIiwiaWF0IjoxNzEyMzM0OTYwLCJleHAiOjE3MTI5Mzk3NjB9.PG3gpluuMilJrBlje-cQONUGeEoBJG9yALRrqXzp90A"
-    );
+  // function getData() {
+  //   const myHeaders = new Headers();
+  //   myHeaders.append("Accept", "application/json");
+  //   myHeaders.append("Content-Type", "application/json");
+  //   myHeaders.append(
+  //     "Authorization",
+  //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaGFzaCI6IldlZCBTZXAgMjIgMjAyMSAxMDowNTowMyBHTVQtMDMwMCIsImRiIjoiSlRCUUstR0pKVDctNFlGTDUtUFdDWloiLCJhcHAiOiJydW50YXNrIiwiaWF0IjoxNzEyMzM0OTYwLCJleHAiOjE3MTI5Mzk3NjB9.PG3gpluuMilJrBlje-cQONUGeEoBJG9yALRrqXzp90A"
+  //   );
 
-    const raw = JSON.stringify({
-      pagination: {
-        size: 1,
-      },
-    });
+  //   const raw = JSON.stringify({
+  //     pagination: {
+  //       size: 1,
+  //     },
+  //   });
 
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+  //   const requestOptions = {
+  //     method: "POST",
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: "follow",
+  //   };
 
-    fetch(
-      "https://api.devel.runtask.com/api/local_users/filter",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        if (result.success && Array.isArray(result.data)) {
-          setData(result.data);
-        } else {
-          console.error("Data is not an array:", result);
-          setData([]);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setData([]);
-      });
-  }
+  //   fetch(
+  //     "https://api.devel.runtask.com/api/local_users/filter",
+  //     requestOptions
+  //   )
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       console.log(result);
+  //       if (result.success && Array.isArray(result.data)) {
+  //         setData(result.data);
+  //       } else {
+  //         console.error("Data is not an array:", result);
+  //         setData([]);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //       setData([]);
+  //     });
+  // }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <div className="p-2 space-y-2 border">

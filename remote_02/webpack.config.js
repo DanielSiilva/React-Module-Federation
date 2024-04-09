@@ -1,28 +1,25 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
+const deps = require("./package.json").dependencies;
+
 const configs = {
-  appName: "container",
+  appName: "remote02",
   appFileName: "remoteEntry.js",
   development: {
-    PUBLIC_PATH: "http://localhost:3000/",
-    REMOTE_PATH: "remote@http://localhost:3001/remoteEntry.js",
-    REMOTE_PATH_02: "remote02@http://localhost:3002/remoteEntry.js",
-    PORT: 3000,
+    PUBLIC_PATH: "http://localhost:3002/",
+    CONTAINER_PATH: "container@http://localhost:3000/remoteEntry.js",
+    PORT: 3002,
   },
-
   production: {
-    PUBLIC_PATH: "http://localhost:3000/",
-    REMOTE_PATH: "remote@http://localhost:3001/remoteEntry.js",
-    PORT: 3000,
+    PUBLIC_PATH: "http://localhost:3002/",
+    CONTAINER_PATH: "container@http://localhost:3000/remoteEntry.js",
+    PORT: 3002,
   },
 };
 
-const deps = require("./package.json").dependencies;
-
 module.exports = (env, argv) => {
   console.log({ env, argv, configs: configs[argv.mode] });
-
   return {
     output: {
       publicPath: configs[argv.mode].PUBLIC_PATH,
@@ -72,14 +69,10 @@ module.exports = (env, argv) => {
         name: configs.appName,
         filename: configs.appFileName,
         remotes: {
-          remote: configs[argv.mode].REMOTE_PATH,
-          remote02: configs[argv.mode].REMOTE_PATH_02,
+          container: configs[argv.mode].CONTAINER_PATH,
         },
         exposes: {
-          "./Button": "./src/components/Button.tsx",
-          "./hooks/useStore": "./src/hooks/useStore.ts",
-          "./hooks/useStoreSelector": "./src/hooks/useStoreSelector.ts",
-          "./providers/StoreProvider": "./src/providers/StoreProvider.tsx",
+          "./CartPage": "./src/pages/cart/index.tsx",
         },
         shared: {
           ...deps,

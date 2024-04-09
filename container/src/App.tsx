@@ -5,6 +5,7 @@ import "./index.css";
 import StoreProvider from "./providers/StoreProvider";
 import { useStoreSelector } from "./hooks/useStoreSelector";
 const TestPage = React.lazy(() => import("remote/TestPage"));
+const TestPage02 = React.lazy(() => import("remote02/CartPage"));
 
 const App = () => {
   const {
@@ -18,6 +19,10 @@ const App = () => {
 
       <Suspense fallback={<div>Loading...</div>}>
         <TestPage />
+      </Suspense>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <TestPage02 />
       </Suspense>
     </div>
   );
