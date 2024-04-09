@@ -14,10 +14,12 @@ export default function TestPage() {
     counter: { value },
     product: { products },
   } = useStoreSelector((state) => state);
+
+  console.log("Value", value);
   return (
     <div className="p-2 space-y-2 border">
-      <label className="text-black">Pagina Remota de Teste</label>
-      <p>counter value : {value}</p>
+      <label className="text-black">Pagina Remota - Aplicacao 01</label>
+      <p>Contator : {value}</p>
       <section className="flex flex-row gap-x-4">
         <Button
           label="Decrement"
