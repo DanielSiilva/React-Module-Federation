@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="max-w-6xl mx-auto mt-10 text-3xl text-red-600">
-      <div>Aplicacao Container</div>
+      <div>Aplicacao Container {value}</div>
 
       <Suspense fallback={<div>Loading...</div>}>
         <TestPage />

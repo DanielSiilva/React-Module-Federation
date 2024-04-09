@@ -1,9 +1,11 @@
 import Button from "container/Button";
 import useStore from "container/hooks/useStore";
 import { useStoreSelector } from "container/hooks/useStoreSelector";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function TestPage() {
+  const [data, setData] = useState([]);
+
   const {
     decrementCounter,
     incrementByAmountCounter,
@@ -16,6 +18,53 @@ export default function TestPage() {
   } = useStoreSelector((state) => state);
 
   console.log("Value", value);
+
+  function getData() {
+    const myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaGFzaCI6IldlZCBTZXAgMjIgMjAyMSAxMDowNTowMyBHTVQtMDMwMCIsImRiIjoiSlRCUUstR0pKVDctNFlGTDUtUFdDWloiLCJhcHAiOiJydW50YXNrIiwiaWF0IjoxNzEyMzM0OTYwLCJleHAiOjE3MTI5Mzk3NjB9.PG3gpluuMilJrBlje-cQONUGeEoBJG9yALRrqXzp90A"
+    );
+
+    const raw = JSON.stringify({
+      pagination: {
+        size: 1,
+      },
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://api.devel.runtask.com/api/local_users/filter",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        if (result.success && Array.isArray(result.data)) {
+          setData(result.data);
+        } else {
+          console.error("Data is not an array:", result);
+          setData([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setData([]);
+      });
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className="p-2 space-y-2 border">
       <label className="text-black">Pagina Remota - Aplicacao 01</label>
@@ -63,6 +112,19 @@ export default function TestPage() {
           </div>
         ))}
       </section>
+      {/* <div>
+        <h1>Usuários:</h1>
+        {data.map((user, index) => (
+          <div key={index}>
+            <p>ID: {user._id}</p>
+            <p>Nome: {user.name || user.Name}</p>
+            <p>Email: {user.Email}</p>
+            <p>Tipo de Usuário: {user.user_type}</p>
+            <p>Última Atividade: {user.last_activity}</p>
+            <p>Perfil de Permissão: {user.permission_profile.join(", ")}</p>
+          </div>
+        ))}
+      </div> */}
     </div>
   );
 }
