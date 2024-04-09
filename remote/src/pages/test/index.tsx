@@ -6,12 +6,7 @@ import React, { useEffect, useState } from "react";
 export default function TestPage() {
   const [data, setData] = useState([]);
 
-  const {
-    decrementCounter,
-    incrementByAmountCounter,
-    incrementCounter,
-    getProductList,
-  } = useStore();
+  const { decrementCounter, incrementCounter, getProductList } = useStore();
   const {
     counter: { value },
     product: { products },
@@ -81,16 +76,6 @@ export default function TestPage() {
           onClick={incrementCounter}
         />
         <Button
-          label="Increment by 5"
-          buttonType={"warning"}
-          onClick={() => incrementByAmountCounter(5)}
-        />
-        <Button
-          label="Decrement by 5"
-          buttonType={"info"}
-          onClick={() => incrementByAmountCounter(-5)}
-        />
-        <Button
           label="Get All Product"
           buttonType={"secondary"}
           onClick={getProductList}
@@ -112,19 +97,6 @@ export default function TestPage() {
           </div>
         ))}
       </section>
-      {/* <div>
-        <h1>Usuários:</h1>
-        {data.map((user, index) => (
-          <div key={index}>
-            <p>ID: {user._id}</p>
-            <p>Nome: {user.name || user.Name}</p>
-            <p>Email: {user.Email}</p>
-            <p>Tipo de Usuário: {user.user_type}</p>
-            <p>Última Atividade: {user.last_activity}</p>
-            <p>Perfil de Permissão: {user.permission_profile.join(", ")}</p>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }

@@ -7,6 +7,7 @@
     "email": "serifcolakel0@gmail.com"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.6",
     "@cloudbeds/webpack-module-federation-types-plugin": "^1.12.12",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",
@@ -16,6 +17,7 @@
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
+    "antd": "^5.16.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "react": "^18.2.0",
