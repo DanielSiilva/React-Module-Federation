@@ -4,7 +4,7 @@ import * as ReactDOMClient from "react-dom/client";
 import "./index.css";
 import StoreProvider from "./providers/StoreProvider";
 import { useStoreSelector } from "./hooks/useStoreSelector";
-import { LeftOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 const TestPage = React.lazy(() => import("remote/TestPage"));
 const CartPage = React.lazy(() => import("remote02/CartPage"));
 
@@ -17,7 +17,9 @@ const App = () => {
   return (
     <div className="flex flex-col h-screen">
       <div className="flex items-center justify-between p-4 bg-white shadow-md">
-        <h1 className="text-lg font-semibold">Shopping Cart</h1>
+        <h1 className="text-lg font-semibold">
+          Shopping Cart Micro Front-end -- App Principal
+        </h1>
         <div className="relative">
           <ShoppingCartOutlined className="text-xl cursor-pointer" />
           {value > 0 && (
@@ -29,7 +31,6 @@ const App = () => {
       </div>
       <div className="flex flex-grow overflow-hidden">
         <div className="w-72 h-full border-r border-gray-300 p-5 flex-shrink-0 overflow-auto">
-          Aplicação Container
           <Suspense fallback={<div>Loading...</div>}>
             <CartPage />
           </Suspense>

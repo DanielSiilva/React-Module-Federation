@@ -1,10 +1,10 @@
 import Button from "container/Button";
 import useStore from "container/hooks/useStore";
 import { useStoreSelector } from "container/hooks/useStoreSelector";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 export default function TestPage() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
   const { decrementCounter, incrementCounter, getProductList } = useStore();
   const {
@@ -60,40 +60,40 @@ export default function TestPage() {
   //   getData();
   // }, []);
 
+  useEffect(() => {
+    getProductList();
+  }, [getProductList]);
+
   return (
     <div className="p-2 space-y-2 border">
-      <label className="text-black">Pagina Remota - Aplicacao 01</label>
-      <p>Contator : {value}</p>
-      <section className="flex flex-row gap-x-4">
-        <Button
-          label="Decrement"
-          buttonType={"error"}
-          onClick={decrementCounter}
-        />
-        <Button
-          label="Increment"
-          buttonType={"primary"}
-          onClick={incrementCounter}
-        />
-        <Button
-          label="Get All Product"
-          buttonType={"secondary"}
-          onClick={getProductList}
-        />
-      </section>
-      <section className="grid grid-cols-4 gap-4">
+      <h1 className="text-black text-center">Pagina Remota 01</h1>
+      <p>Quantidade de Produtos : {products.length}</p>
+
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {products.map((product) => (
           <div
-            className="flex flex-col items-center justify-center text-center text-black border-2 border-gray-300 rounded-lg gap-y-4"
+            className="flex flex-col items-center justify-center text-center text-black border-2 border-gray-300 rounded-lg p-4 gap-y-4 shadow-lg hover:shadow-xl transition-shadow"
             key={product.id}
           >
-            <div>{product.brand}</div>
+            <div className="font-bold text-lg">{product.brand}</div>
             <img
               src={product.images[0]}
-              className="object-contain w-24 h-24"
+              className="object-contain w-24 h-24 mx-auto"
               alt={product.brand}
             />
-            <em>{product.price} $</em>
+            <div className="font-medium text-gray-800">{product.price} $</div>
+            <div className="flex flex-row gap-x-2">
+              <Button
+                label="Adicionar"
+                buttonType={"primary"}
+                onClick={incrementCounter}
+              />
+              <Button
+                label="Remover"
+                buttonType={"error"}
+                onClick={decrementCounter}
+              />
+            </div>
           </div>
         ))}
       </section>
